@@ -1,0 +1,420 @@
+{% assign id = section.id %}
+<style>
+    #shopify-section-{{ id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+     p{
+       margin: 0;
+     }
+    }
+    .heading-{{ id }} {
+       margin: 0 0 50px 0;
+    }
+    .wrapper-{{ id }} {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(100px, 1fr));
+      gap: 20px;
+      align-items: center;
+      position: relative;
+      @media(max-width: 768px){
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .wrapper-{{ id }} .feature__img{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 1.1;
+      @media(max-width: 500px){
+        aspect-ratio: unset;
+      }
+    }
+    .wrapper-{{ id }} .block{
+      position: relative;
+      line-height: 0;
+      .svg_wrapper{
+        position: absolute;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        /* padding: 7px; */
+        background: #F8F8F8E5;
+        border-radius: 50%;
+        z-index: 2;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .wrapper-{{ id }} .info__wrapp{
+      z-index: 9;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100vw;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: brightness(0.8);
+      display: none;
+      min-height: 100vh;
+    }
+  .wrapper-{{ id }} .info{
+      margin: auto;
+      border-radius: var(--rounded-none, 0px);
+      background: #FFF;
+      padding: 36px 16px 25px 16px;
+      align-items: stretch;
+      max-width: 350px;
+      box-sizing: border-box;
+      position: relative;
+      @media(max-width: 768px){
+        grid-template-columns: 1fr;
+        width: calc(100% - 20px);
+      }
+      img{
+        aspect-ratio: unset;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        @media(max-width: 768px){
+          max-width: 125px;
+        }
+        @media(max-width: 500px){
+          display: none;
+        }
+      }
+      .pd__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        a{
+          width: max-content;
+          padding: 12px 40px;
+          @media(max-width: 768px){
+              width: 100%;
+            margin: 16px 0 0 0;
+          }
+        }
+      }
+    }
+  .wrapper-{{ id }} .info__container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 8px;
+    padding: 0 0 20px 0;
+  }
+   .wrapper-{{ id }} .info__wrapp.active{
+     display: flex;
+   }
+   .wrapper-{{ id }} .info__title h4{
+    margin: 0 0  20px 0;
+    font-size: 16px;
+    line-height: 120%;
+    font-family: var(--font-body-family);
+   }
+   .wrapper-{{ id }} .info__title p{
+    font-size: 16px;
+    line-height: normal;
+    font-family: var(--font-heading-family);
+    color: #000;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+   }
+   .info__desc {
+    font-family: var(--font-body-family);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 110%;
+    letter-spacing: -0.01em;
+     margin-top: 12px;
+   }
+  .close__icon-wrap {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      cursor: pointer;
+  }
+  @media screen and (max-width: 890px){
+     #shopify-section-{{ id }} {
+       margin-top: {{ section.settings.margin_top-m }}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-m }}px;
+    }
+  }
+</style>
+<section class="{% unless section.settings.full_width %}page-width{% endunless %}">
+  <div class="container-{{ id }}">
+    <div class="heading-{{ id }}">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <div class="wrapper-{{ id }}">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        <div class="block block--{{ block.id }}">
+          <style>
+            .block--{{ block.id }} .svg_wrapper{
+              top: {{ block.settings.icon_vr }}%;
+              left: {{ block.settings.icon_hr }}%;
+            }
+          </style>
+          {% if block.settings.image %}
+            {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: class: 'feature__img' }}
+          {% elsif product.featured_image %}
+            {{
+              product.featured_image
+              | image_url: width: product.featured_image.width
+              | image_tag: class: 'feature__img'
+            }}
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: class: 'feature__img' }}
+          {% endif %}
+          <div class="svg_wrapper" id="stl_icon--{{ block.id }}" data-svg data-title="{{ product.handle }}">
+            {% if section.settings.svg != blank %}{{ section.settings.svg }}{% endif %}
+          </div>
+        </div>
+        <div class="info__wrapp" data-title="{{ product.handle }}" id="pd__container-{{ block.id }}" data-stl-container>
+          <div class="info" data-info>
+            <div class=" info__container">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: product.featured_image.width | image_tag }}
+              {% endif %}
+              <div class="pd__info">
+                <div class="info__title">
+                  <h4>{{ product.title }}</h4>
+                  <p>
+                    {{ product.price | money -}}
+                    <span class="line-through">{{ product.compare_at_price | money }}</span>
+                  </p>
+                </div>
+                <div class="info__desc">
+                  {{ product.description }}
+                </div>
+              </div>
+            </div>
+            <a
+              class="global__btn solid"
+              data-atc-btn
+              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+            >
+              {{- block.settings.btn_text -}}
+              <span>{% render 'right-arrow' %}</span>
+            </a>
+
+            <div class="close__icon-wrap" data-cross>{% render 'cross' %}</div>
+          </div>
+        </div>
+        {% render 'atc-script', product: product %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const infoContainers = document.querySelectorAll("[data-stl-container]");
+    const svgWrappers = document.querySelectorAll("[data-svg]");
+    const closeBtns = document.querySelectorAll("[data-cross]");
+
+    svgWrappers.forEach(svgWrapper => {
+      svgWrapper.addEventListener("click", function (e) {
+        const title = e.target.dataset.title;
+
+        infoContainers.forEach((infoContainer) => {
+          if (infoContainer.dataset.title === title) {
+            infoContainer.classList.add("active");
+          } else {
+            // infoContainer.classList.remove("active");
+          }
+        });
+
+        // e.stopPropagation();
+      });
+    });
+
+    closeBtns.forEach((closeBtn) => {
+      closeBtn.addEventListener("click", function (e){
+        infoContainers.forEach(infoContainer => {
+        if (infoContainer.classList.contains("active"))
+          infoContainer.classList.remove("active");
+
+        });
+      })
+    })
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest('[data-info]') && !e.target.closest('[data-svg]')) {
+        infoContainers.forEach(infoContainer => {
+        if (infoContainer.classList.contains("active"))
+          infoContainer.classList.remove("active");
+
+        });
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Image Grid",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Echologyx in the wild"
+    },
+    {
+      "type": "html",
+      "id": "svg",
+      "label": "Image Grid icon"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Featured Image",
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Label",
+          "default": "Add to cart"
+        },
+        {
+          "type": "header",
+          "content": "Icon Position"
+        },
+        {
+          "type": "range",
+          "id": "icon_vr",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Icon Varticle",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "icon_hr",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Icon Horizontal",
+          "default": 50
+        },
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Custom Image Grid"
+    }
+  ]
+}
+{% endschema %}

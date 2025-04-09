@@ -1,0 +1,51 @@
+.global__btn {
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: var(--font-body-family);
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    padding: 12px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    background: #FFF544;
+    position: relative;
+    transition: all .4s ease-in-out;
+}
+.global__btn svg path{
+   transition: all .4s ease-in-out;
+}
+.global__btn:after {
+    position: absolute;
+    content: "";
+    background: #000;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    color: #fff;
+    transition: all .4s ease-in-out;
+    z-index: -1;
+}
+.global__btn:hover {
+   color: #fff;
+   background: transparent;
+}
+.global__btn:hover svg path{
+   fill: #fff;
+}
+.global__btn:hover:after {
+    width: 100%;
+}
+
+.global__btn.solid {
+    color: #fff;  
+    background: #000;  
+    cursor: pointer !important;
+}
+.global__btn.solid svg path{
+    fill: #fff;
+}

@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "custom_image_grid_jxEHNx": {
+      "type": "custom-image-grid",
+      "blocks": {
+        "content_BWFGzd": {
+          "type": "content",
+          "settings": {
+            "product": "tailored-jacket-copy",
+            "btn_text": "Add to cart",
+            "icon_vr": 60,
+            "icon_hr": 64
+          }
+        },
+        "content_dXDVgx": {
+          "type": "content",
+          "settings": {
+            "product": "green-trench-coat-copy-copy",
+            "btn_text": "Add to cart",
+            "icon_vr": 50,
+            "icon_hr": 90
+          }
+        },
+        "content_rDg8Wi": {
+          "type": "content",
+          "settings": {
+            "product": "green-trench-coat-copy",
+            "btn_text": "Add to cart",
+            "icon_vr": 18,
+            "icon_hr": 63
+          }
+        },
+        "content_V7HRAt": {
+          "type": "content",
+          "settings": {
+            "product": "green-trench-coat",
+            "btn_text": "Add to cart",
+            "icon_vr": 21,
+            "icon_hr": 79
+          }
+        },
+        "content_DXtQ49": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/image_826.png",
+            "product": "the-collection-snowboard-oxygen",
+            "btn_text": "Add to cart",
+            "icon_vr": 25,
+            "icon_hr": 50
+          }
+        },
+        "content_UN7f6j": {
+          "type": "content",
+          "settings": {
+            "product": "long-sleeve-tennis-top",
+            "btn_text": "Add to cart",
+            "icon_vr": 39,
+            "icon_hr": 79
+          }
+        }
+      },
+      "block_order": [
+        "content_BWFGzd",
+        "content_dXDVgx",
+        "content_rDg8Wi",
+        "content_V7HRAt",
+        "content_DXtQ49",
+        "content_UN7f6j"
+      ],
+      "settings": {
+        "full_width": false,
+        "title": "Echologyx in the wild",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" viewbox=\"0 0 11 11\" fill=\"none\">\n<path d=\"M5.3457 1.04175V9.50329\" stroke=\"black\" stroke-width=\"1.5\" stroke-linecap=\"square\" stroke-linejoin=\"round\"></path>\n<path d=\"M1.11523 5.27252H9.57677\" stroke=\"black\" stroke-width=\"1.5\" stroke-linecap=\"square\" stroke-linejoin=\"round\"></path>\n</svg>",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 90,
+        "padding_bottom": 90,
+        "margin_top-m": 0,
+        "margin_bottom-m": 0,
+        "padding_top-m": 0,
+        "padding_bottom-m": 0
+      }
+    }
+  },
+  "order": [
+    "featured_collection",
+    "custom_image_grid_jxEHNx"
+  ]
+}
