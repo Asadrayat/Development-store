@@ -1,7 +1,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const atcBtns = document.querySelectorAll("[data-atc-btn]");
-
+    const infoContainers = document.querySelectorAll("[data-stl-container]");
     atcBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
         // Grab the variant ID from a data attribute
@@ -22,13 +22,18 @@
         })
         .then(response => response.json())
         .then(data => {
-          console.log('Product added to cart:', data);
-          // Optional: Trigger a UI update or open cart drawer
-        })
-        .catch((error) => {
-          console.error('Error adding to cart:', error);
-        });
-      });
+          infoContainers.forEach(infoContainer => {
+          if (infoContainer.classList.contains("active"))
+            infoContainer.classList.remove("active");
+
+          });
+            const this_cartDrawer = document.querySelector('cart-drawer');
+            this_cartDrawer.refresh(true);
+          })
+          .catch((error) => {
+            console.error('Error adding to cart:', error);
+          });
+       });
     });
   });
 </script>
